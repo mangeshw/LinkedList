@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -107,6 +108,13 @@ namespace LinkedList
             int fIndex = start, lIndex = mid + 1, index = 0;
             int[] firstHalf = new int[mid - start + 1];
             int[] secondHalf = new int[end - mid];
+            int[,] matrix = new int[10, 10];
+            int[,,] matrix_3d = new int[10, 10, 10];
+            List<int> l = new List<int>();
+            ArrayList a = new ArrayList();
+            a.Add("d");
+            a.Add(3);
+
             while (fIndex <= mid || lIndex <= end)
             {
                 if (fIndex <= mid && index <= mid - start + 1)
@@ -210,7 +218,7 @@ namespace LinkedList
                 {
                     num1 = array[index];
                     num2 = array[pivot];
-                    if (pivot-index == 1 && num1 > num2)
+                    if (pivot - index == 1 && num1 > num2)
                     {
                         array[index] = num2;
                         array[pivot] = num1;
@@ -246,11 +254,11 @@ namespace LinkedList
             //int[] result = new int[length];
             bool result = true;
             int index = 0, before = 0, after = length - 1;
-            for(;index < length; index++)
+            for (; index < length; index++)
             {
                 // 4 1 2 3 0
                 //SearchForElement(cArray,before,length)
-                if(cArray[index] == before || cArray[index] == after)
+                if (cArray[index] == before || cArray[index] == after)
                 {
                     before++;
                     after--;
@@ -260,7 +268,187 @@ namespace LinkedList
             }
             return result;
         }
-        
+
+        private void btnQuickSort_Click(object sender, EventArgs e)
+        {
+            char[] array = txtArray1.Text.Trim().ToLower().ToCharArray();
+            QuickSort(array, 0, array.Length - 1);
+            txtResult.Text = String.Join(", ", array);
+        }
+
+        public void QuickSort(char[] arr, int low, int high)
+        {
+            if (low < high)
+            {
+                int partition = Partition(arr, low, high);
+                QuickSort(arr, low, partition - 1);
+                QuickSort(arr, partition + 1, high);
+            }
+        }
+
+        public int Partition(char[] arr, int low, int high)
+        {
+            int partition = low - 1;
+            int pivot = (int)arr[high];
+            int ascii;
+            for (int index = low; index < high; index++)
+            {
+                ascii = (int)arr[index];
+                char temp;
+                if (pivot > ascii)
+                {
+                    partition++;
+                    temp = arr[index];
+                    arr[index] = arr[partition];
+                    arr[partition] = temp;
+                }
+            }
+            char t = arr[partition + 1];
+            arr[partition + 1] = (char)pivot;
+            arr[high] = t;
+            return partition + 1;
+        }
+
+        private void btnMerge2_Click(object sender, EventArgs e)
+        {
+            int[] array = SearchForm.ConvertToIntArray(txtArray1.Text.Split(','));
+            array = MergeSort(array, 0, array.Length - 1);
+            string result = String.Join(",", array);
+            txtResult.Text = result;
+        }
+
+        public int[] MergeSort(int[] array, int start, int end)
+        {
+            // 3 5 1 7 8
+
+            int mid = start + (end - start) / 2;
+            if (end - start > 1)
+            {
+                array = MergeSort(array, start, mid);//0 2
+                array = MergeSort(array, mid + 1, end);//
+            }
+            array = Merge2(array, start, end, mid);// 0 2 1
+            return array;
+        }
+
+        public int[] Merge2(int[] array, int start, int end, int mid)
+        {
+            if (end == start)
+                return array;
+            else if (end - start == 1)
+            {
+                if (array[start] > array[end])
+                {
+                    int buffer = array[end];
+                    array[end] = array[start];
+                    array[start] = buffer;
+                }
+                return array;
+            }
+            else
+            {
+                //3 5 1
+                int[] firstHalf = new int[mid - start + 1];
+                int[] secondHalf = new int[end - mid];
+                int smallerLength = firstHalf.Length > secondHalf.Length ? secondHalf.Length : firstHalf.Length;//1
+                int index = 0, f_index = 0, s_index = 0;
+                for (; index < smallerLength; index++)
+                {
+                    firstHalf[index] = array[start + index];
+                    secondHalf[index] = array[mid + 1 + index];
+                }
+
+                if (index < firstHalf.Length)
+                    firstHalf[index] = array[start + index];
+                if (index < secondHalf.Length)
+                    secondHalf[index] = array[mid + 1 + index];
+
+                index = 0;
+              
+                while (f_index < firstHalf.Length && s_index < secondHalf.Length)
+                {
+                    if (firstHalf[f_index] < secondHalf[s_index])
+                    {
+                        array[start + index] = firstHalf[f_index];
+                        f_index++;
+                    }
+                    else
+                    {
+                        array[start + index] = secondHalf[s_index];
+                        s_index++;
+                    }
+                    index++;
+                }
+
+                while (f_index < firstHalf.Length)
+                {
+                    array[start + index] = firstHalf[f_index];
+                    f_index++;
+                    index++;
+                }
+                while (s_index < secondHalf.Length)
+                {
+                    array[start + index] = secondHalf[s_index];
+                    s_index++;
+                    index++;
+                }
+
+                return array;
+            }
+        }
+
+        private void btnQuick2_Click(object sender, EventArgs e)
+        {
+            int[] array = SearchForm.ConvertToIntArray(txtArray1.Text.Split(','));
+            array = QuickSort2(array, 0, array.Length-1);
+            string result = String.Join(",", array);
+            txtResult.Text = result;
+        }
+
+        public int[] QuickSort2(int[] array, int low, int high)
+        {
+            if (high <= low)
+                return array;
+            else if (high - low == 1)
+            {
+                if (array[low] > array[high])
+                    SwapArrayIntegers(array, low, high);
+                return array;
+            }
+            // 1 3 5 7
+            int pivot = Partition(array, low, high);
+            array = QuickSort2(array, low, pivot - 1);//
+            array = QuickSort2(array, pivot + 1, high);//
+            return array;
+        }
+
+        public int Partition(int[] array, int low, int high)
+        {
+            int smallIndex = low - 1, index = low;
+
+            for (; index < high; index++)
+            {
+                if (array[index] <= array[high])
+                {
+                    smallIndex++;
+                    if (smallIndex != index)
+                        SwapArrayIntegers(array, smallIndex, index);
+                }
+            }
+
+            smallIndex++;
+            if(smallIndex != high)
+                SwapArrayIntegers(array, smallIndex, high);
+
+            return smallIndex;
+        }
+
+        public void SwapArrayIntegers(int[] array, int smallIndex, int index)
+        {
+            int buffer = array[index];
+            array[index] = array[smallIndex];
+            array[smallIndex] = buffer;
+        }
     }
 }
 

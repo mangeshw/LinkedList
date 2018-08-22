@@ -43,6 +43,9 @@
             this.btnSquareandSort = new System.Windows.Forms.Button();
             this.btnSumDifferences = new System.Windows.Forms.Button();
             this.btnBeforeAndAfter = new System.Windows.Forms.Button();
+            this.btnQuickSort = new System.Windows.Forms.Button();
+            this.btnQuick2 = new System.Windows.Forms.Button();
+            this.btnMerge2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblEnterArray1
@@ -179,11 +182,44 @@
             this.btnBeforeAndAfter.UseVisualStyleBackColor = true;
             this.btnBeforeAndAfter.Click += new System.EventHandler(this.btnBeforeAndAfter_Click);
             // 
+            // btnQuickSort
+            // 
+            this.btnQuickSort.Location = new System.Drawing.Point(108, 141);
+            this.btnQuickSort.Name = "btnQuickSort";
+            this.btnQuickSort.Size = new System.Drawing.Size(75, 23);
+            this.btnQuickSort.TabIndex = 53;
+            this.btnQuickSort.Text = "Quick Sort";
+            this.btnQuickSort.UseVisualStyleBackColor = true;
+            this.btnQuickSort.Click += new System.EventHandler(this.btnQuickSort_Click);
+            // 
+            // btnQuick2
+            // 
+            this.btnQuick2.Location = new System.Drawing.Point(275, 141);
+            this.btnQuick2.Name = "btnQuick2";
+            this.btnQuick2.Size = new System.Drawing.Size(75, 23);
+            this.btnQuick2.TabIndex = 54;
+            this.btnQuick2.Text = "Quick Sort 2";
+            this.btnQuick2.UseVisualStyleBackColor = true;
+            this.btnQuick2.Click += new System.EventHandler(this.btnQuick2_Click);
+            // 
+            // btnMerge2
+            // 
+            this.btnMerge2.Location = new System.Drawing.Point(189, 141);
+            this.btnMerge2.Name = "btnMerge2";
+            this.btnMerge2.Size = new System.Drawing.Size(80, 23);
+            this.btnMerge2.TabIndex = 55;
+            this.btnMerge2.Text = "Merge Sort 2";
+            this.btnMerge2.UseVisualStyleBackColor = true;
+            this.btnMerge2.Click += new System.EventHandler(this.btnMerge2_Click);
+            // 
             // ArrayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(471, 170);
+            this.Controls.Add(this.btnMerge2);
+            this.Controls.Add(this.btnQuick2);
+            this.Controls.Add(this.btnQuickSort);
             this.Controls.Add(this.btnBeforeAndAfter);
             this.Controls.Add(this.btnSumDifferences);
             this.Controls.Add(this.btnSquareandSort);
@@ -223,5 +259,8 @@
         private System.Windows.Forms.Button btnSquareandSort;
         private System.Windows.Forms.Button btnSumDifferences;
         private System.Windows.Forms.Button btnBeforeAndAfter;
+        private System.Windows.Forms.Button btnQuickSort;
+        private System.Windows.Forms.Button btnQuick2;
+        private System.Windows.Forms.Button btnMerge2;
     }
 }

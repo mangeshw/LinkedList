@@ -100,5 +100,19 @@ namespace LinkedList
                 treeForm = null;
             }
         }
+
+        private void btnGraph_Click(object sender, EventArgs e)
+        {
+            GraphForm graphForm;
+            try
+            {
+                graphForm = new GraphForm();
+                graphForm.ShowDialog();
+            }
+            finally
+            {
+                graphForm = null;
+            }
+        }
     }
 }

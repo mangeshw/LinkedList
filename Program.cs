@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 using System.Windows.Forms;
 
 namespace LinkedList
@@ -15,6 +15,127 @@ namespace LinkedList
         [STAThread]
         static void Main()
         {
+            //Dictionary<int, string> dict = new Dictionary<int, string>();
+            //dict = new Dictionary<int, string>(2);
+            //StringBuilder build = new StringBuilder();
+            //build.Append("1");
+            //build.Append("2");
+            //build.Append("3");
+            //build.Append("4");
+            //build.Append("5");
+            //build.Append("6");
+            //build.Remove(1, 3);
+            //build.Remove(0, 3);
+            ////int[] buffer = new int[1, 1];
+            ////build.Length
+            //string er = "123456";
+            //er = er.Remove(2, 3);
+            //dict.Add(1, "1");
+            //dict.Add(2, "2");
+            //dict.Add(3, "3");
+            //int[] nums = { 3, 2, 1, 5, 6, 4 };
+            //nums.ToList().Sort();
+            //nums.Where(w => w == 2);
+            //nums = nums.ToList().OrderByDescending(w => w).ToArray();
+            //SortedSet<int> aa = new SortedSet<int>();
+            //SortedList<int, List<List<int>>> ba = new SortedList<int, List<List<int>>>();
+            //List<List<int>> list = new List<List<int>>();
+            //IList<int> qq = new List<int>();
+            //qq.Add(3);
+            //ba.Add(0, qq as List<List<int>>);
+            //list = ba.Values as List<List<int>>;
+
+            //IList<IList<int>> k = null;
+            //k = list as IList<IList<int>>;
+            //int[] iarr = { 5 };
+            //int[,] hh = new int[7,8];
+            //bool[] icConnected = new bool[5];
+            //hh.GetLength(1);
+            ////arr = { 35 };
+            //aa.Add(1);
+            //aa.Add(1);
+            ////ba = aa;
+            //int min = int.MinValue;
+            //int max = int.MaxValue;
+            ////max = Math.Sign(-2);
+            ////max = Math.Sign(2);
+            //int diff = min - max;
+            //int?[] na = new int?[10];
+            //int? a = min - 1;
+            
+            //List<int> r1 = new List<int>();
+            ////list = r1;
+            ////list.Insert(-1, 4);
+            ////list.Insert(0, 4);
+            ////list.Remove(4);
+            //a = 0;
+            //a += Convert.ToInt32(Math.Pow(10, 0)) * 2;
+            //HashSet<int> set = new HashSet<int>();
+            //set.Add(1);
+            //set.Add(1);
+            //a += Convert.ToInt32(Math.Pow(10, 1)) * 1;
+            //int b = max + 1;
+            //LNode node = new LNode();
+            //node.IntegerData = 1;
+            //LNode head = new LNode();
+            //head = node;
+            //node.IntegerData = 2;
+            //node = node.Next;
+            //node = new LNode();
+            //node.IntegerData = 4;
+            //aa.Add(1);
+            //aa.Add(1);
+            //int result;
+            //bool cv = int.TryParse("w", out result);
+            //int[,,] ar = new int[3, 2, 6];
+            //a = ar.Length;
+            //b = ar.Rank;
+            //int a1 = ar.GetLength(0);
+            //int a2 = ar.GetLength(1);
+            //int[] aq = new int[10];
+            //Class1 c = new Class1();
+            //string lit = "romeo romeo wherefore art thou romeo wherefore wherefore";
+            //List<string> exclude = new List<string>();
+            //exclude.Add("art");
+            //exclude.Add("thou");
+            //c.retrieveMostFrequentlyUsedWords(lit, exclude);
+            //Class2 cc = new Class2();
+            //int x = 5;
+            //string[] arr = { "a1 9 2 3 1", "g1 act car", "zo4 4 4 7", "ab1 off key dog", "a8 act zoo"};
+            //cc.reorderLines(x, arr);
+            //char v = ""[2];
+            //char.IsPunctuation(v);
+            //" ".Replace(" ", "");
+            //String.Format("", 1, 2, 3);
+            //HashSet<int> hSet = new HashSet<int>();
+            //hSet.Add(1);
+            //hSet.Add(0);
+            //hSet.Add(1);
+            //bool i = hSet.Contains(4);
+            ////Hashtable t = new Hashtable();
+            
+            ////int a3 = ar.GetLength(3);
+            //KeyValuePair<int, string> kvc = new KeyValuePair<int, string>();
+            
+            //foreach (KeyValuePair<int, string> kv in dict)
+            //{
+            //    //dict.ContainsKey("");
+            //    //SortedDictionary<string, int> s = new SortedDictionary<string, int>();
+            //    //kv.Value
+            //}
+            //List<string> l = new List<string>();
+            //l.Contains("");
+            //l.Insert(-1, "f");
+            ////string.Join(",", arr)
+
+            //string s = "anagram";
+            ////List<char> v = s.OrderBy(x => x).ToList();
+            //if ('b' > 'C')
+            //    Console.WriteLine("aya");
+            //int ascii = (int)'C';
+            ////char c = (char)97;
+            //s.ToCharArray();
+            //GFG.ConstructSolution();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
@@ -100,7 +221,7 @@ namespace LinkedList
         public LNode First { get; set; }
         //This is Front for Queue and Last node for LinkedList and Stack
         public LNode Last { get; set; }
-        
+
         public int Length { get; private set; }
         public int MaximumInteger { get; private set; }
         public int MinimumInteger { get; private set; }
@@ -172,7 +293,7 @@ namespace LinkedList
                 case ListOperation.Insert:
                     //Set Length for all data structures
                     Length++;
-                    
+
                     //TODO
                     ////Set Maximum 
                     //if (node.IntegerData > MaximumInteger)
@@ -190,7 +311,7 @@ namespace LinkedList
                 default: return;
             }
         }
-        
+
         //Add a node()
         public bool Add(LNode newNode)
         {
@@ -198,7 +319,7 @@ namespace LinkedList
                 return false;
             newNode.Next = null;
             //Set Front for Queue
-            if(Length == 0)
+            if (Length == 0)
             {
                 Last = newNode;
                 First = newNode;
@@ -218,7 +339,7 @@ namespace LinkedList
         {
             if (Length == int.MaxValue)
                 return false;
-            if(Length == 0)
+            if (Length == 0)
             {
                 First = newNode;
                 Last = newNode;
@@ -240,7 +361,7 @@ namespace LinkedList
             if (Length == 0)
                 return null;
             if (operation == ListOperation.Pop || operation == ListOperation.Delete)
-            {   
+            {
                 node = First;
                 //Set Root for Stack
                 First = First.Next;
@@ -274,19 +395,19 @@ namespace LinkedList
         {
             return AddFirst(newNode);
         }
-        
+
         //Pop()
         public LNode Pop()
         {
             return Delete(ListOperation.Pop);
         }
-        
+
         //Enqueue()
         public bool Enqueue(LNode newNode)
         {
             return AddFirst(newNode);
         }
-        
+
         //Dequeue()
         public LNode Dequeue()
         {
@@ -396,5 +517,13 @@ namespace LinkedList
         {
             Root = RootNode;
         }
+        
+    }
+
+    public class GraphNode
+    {
+        public int data;
+        public List<GraphNode> nodes = new List<GraphNode>();
+        public bool isVisited = false;
     }
 }

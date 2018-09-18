@@ -16,6 +16,8 @@ namespace LinkedList
         static void Main()
         {
             //Dictionary<int, string> dict = new Dictionary<int, string>();
+            //int ff = Convert.ToInt32('4');
+             
             //dict = new Dictionary<int, string>(2);
             //StringBuilder build = new StringBuilder();
             //build.Append("1");
@@ -29,7 +31,11 @@ namespace LinkedList
             ////int[] buffer = new int[1, 1];
             ////build.Length
             //string er = "123456";
+            //char[] str = er.ToCharArray();
+            
+            //string ree = new string(str);
             //er = er.Remove(2, 3);
+            ////er[3] = 'f';
             //dict.Add(1, "1");
             //dict.Add(2, "2");
             //dict.Add(3, "3");
@@ -48,7 +54,7 @@ namespace LinkedList
             //IList<IList<int>> k = null;
             //k = list as IList<IList<int>>;
             //int[] iarr = { 5 };
-            //int[,] hh = new int[7,8];
+            //int[,] hh = new int[7, 8];
             //bool[] icConnected = new bool[5];
             //hh.GetLength(1);
             ////arr = { 35 };
@@ -62,7 +68,7 @@ namespace LinkedList
             //int diff = min - max;
             //int?[] na = new int?[10];
             //int? a = min - 1;
-            
+
             //List<int> r1 = new List<int>();
             ////list = r1;
             ////list.Insert(-1, 4);
@@ -101,11 +107,11 @@ namespace LinkedList
             //c.retrieveMostFrequentlyUsedWords(lit, exclude);
             //Class2 cc = new Class2();
             //int x = 5;
-            //string[] arr = { "a1 9 2 3 1", "g1 act car", "zo4 4 4 7", "ab1 off key dog", "a8 act zoo"};
-            //cc.reorderLines(x, arr);
-            //char v = ""[2];
-            //char.IsPunctuation(v);
-            //" ".Replace(" ", "");
+            //string[] arr = { "a1 9 2 3 1", "g1 act car", "zo4 4 4 7", "ab1 off key dog", "a8 act zoo" };
+            ////cc.reorderLines(x, arr);
+            ////char v = ""[2];
+            ////char.IsPunctuation(v);
+            ////" ".Replace(" ", "");
             //String.Format("", 1, 2, 3);
             //HashSet<int> hSet = new HashSet<int>();
             //hSet.Add(1);
@@ -113,10 +119,10 @@ namespace LinkedList
             //hSet.Add(1);
             //bool i = hSet.Contains(4);
             ////Hashtable t = new Hashtable();
-            
+
             ////int a3 = ar.GetLength(3);
             //KeyValuePair<int, string> kvc = new KeyValuePair<int, string>();
-            
+
             //foreach (KeyValuePair<int, string> kv in dict)
             //{
             //    //dict.ContainsKey("");
@@ -525,5 +531,76 @@ namespace LinkedList
         public int data;
         public List<GraphNode> nodes = new List<GraphNode>();
         public bool isVisited = false;
+    }
+
+    public class WGraphEdge
+    {
+        public int weight;
+        public WGraphNode source;
+        public WGraphNode destination;
+    }
+
+    public class WGraphNode
+    {
+        public int data;
+        public List<WGraphEdge> edges = null;
+        public bool isVisited = false;
+    }
+
+    public class WeightedGraph
+    {
+        public int vertices;
+        public List<WGraphEdge> edges = null;
+    }
+
+    public static class Utility
+    {
+        public static string StackToString<T>(this Stack<T> stack)
+        {
+            if (stack == null && stack.Count > 0) return String.Empty;
+            StringBuilder str = new StringBuilder();
+
+            while (stack.Count > 0)
+            {
+                dynamic node = stack.Pop();
+                str.Append(node.data);
+                str.Append(",");
+            }
+
+            if (str.Length > 0)
+                str.Remove(str.Length - 1, 1);
+            return str.ToString();
+        }
+        
+    }
+
+    public class Pair<T, U>
+    {
+        public T First;
+        public U Second;
+
+        public Pair(T first, U second)
+        {
+            this.First = first;
+            this.Second = second;
+        }
+
+        public string ListToString(List<Pair<T, U>> list)
+        {
+            StringBuilder builder = new StringBuilder();
+            foreach (Pair<T, U> pair in list)
+            {
+                builder.Append("(");
+                builder.Append(Convert.ToString(pair.First));
+                builder.Append(",");
+                builder.Append(Convert.ToString(pair.Second));
+                builder.Append(")");
+                builder.Append(",");
+            }
+
+            if (builder.Length > 0)
+                builder.Remove(builder.Length - 1, 1);
+            return Convert.ToString(builder);
+        }
     }
 }

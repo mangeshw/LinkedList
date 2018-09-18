@@ -35,6 +35,7 @@
             this.btnCustomList = new System.Windows.Forms.Button();
             this.btnTree = new System.Windows.Forms.Button();
             this.btnGraph = new System.Windows.Forms.Button();
+            this.btnWeightedGraph = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnLinkedList
@@ -107,11 +108,22 @@
             this.btnGraph.UseVisualStyleBackColor = true;
             this.btnGraph.Click += new System.EventHandler(this.btnGraph_Click);
             // 
+            // btnWeightedGraph
+            // 
+            this.btnWeightedGraph.Location = new System.Drawing.Point(252, 39);
+            this.btnWeightedGraph.Name = "btnWeightedGraph";
+            this.btnWeightedGraph.Size = new System.Drawing.Size(96, 23);
+            this.btnWeightedGraph.TabIndex = 7;
+            this.btnWeightedGraph.Text = "Weighted Graph";
+            this.btnWeightedGraph.UseVisualStyleBackColor = true;
+            this.btnWeightedGraph.Click += new System.EventHandler(this.btnWeightedGraph_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(399, 127);
+            this.Controls.Add(this.btnWeightedGraph);
             this.Controls.Add(this.btnGraph);
             this.Controls.Add(this.btnTree);
             this.Controls.Add(this.btnCustomList);
@@ -134,5 +146,6 @@
         private System.Windows.Forms.Button btnCustomList;
         private System.Windows.Forms.Button btnTree;
         private System.Windows.Forms.Button btnGraph;
+        private System.Windows.Forms.Button btnWeightedGraph;
     }
 }

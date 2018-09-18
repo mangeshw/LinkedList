@@ -68,12 +68,10 @@ namespace LinkedList
 
         GraphNode FindNode(int data)
         {
-            int index = 0;
             foreach (GraphNode node in list)
             {
                 if (node.data == data)
                     return node;
-                index++;
             }
             return null;
         }
@@ -182,7 +180,7 @@ namespace LinkedList
             {
                 lblOperationMessage.Text = String.Empty;
                 ClearGraphTraversal();
-                if(list.Count > 0)
+                if (list.Count > 0)
                     txtResult.Text = AreAllNodesConnected(list[0]).ToString();
                 lblOperationMessage.Text = "Are All Nodes Connected Done";
             }
@@ -255,7 +253,7 @@ namespace LinkedList
                 {
                     DFS(list[0], values);
                     if (values.Length > 0)
-                        values.Remove(values.Length-1,1);
+                        values.Remove(values.Length - 1, 1);
                     txtResult.Text = Convert.ToString(values);
                 }
                 else
@@ -346,7 +344,7 @@ namespace LinkedList
                 bigO++;
                 isMother = AreAllNodesConnected(node);
                 if (isMother)
-                { 
+                {
                     builder.Append(node.data);
                     builder.Append(",");
                 }
@@ -373,7 +371,6 @@ namespace LinkedList
         public void KnightProblem(int x, int y)
         {
             int boardSize = 6;
-
         }
 
         private void btnMotherVertexOptimized_Click(object sender, EventArgs e)
@@ -397,14 +394,14 @@ namespace LinkedList
             ClearGraphTraversal();
             bigO = 0;
             lastVisited = FindLastVisitedNode(list[0]);
-            
+
             return Convert.ToString(list[lastVisited].data);
         }
 
         public int FindLastVisitedNode(GraphNode root)
         {
             int lastVisited = -1, index = 0;
-            
+
             foreach (GraphNode node in list)
             {
                 bigO++;
@@ -427,7 +424,7 @@ namespace LinkedList
                 areAllVisited = areAllVisited && node.isVisited;
             }
 
-            if(areAllVisited)
+            if (areAllVisited)
                 return lastVisited;
             return -1;
         }
@@ -450,7 +447,7 @@ namespace LinkedList
             try
             {
                 lblOperationMessage.Text = String.Empty;
-                
+
                 int cores = Convert.ToInt32(txtNumberOfNodes.Text);
                 RemoveCores(cores);
                 string values = String.Join(",", list.Select(x => x.data).ToList());
@@ -468,12 +465,14 @@ namespace LinkedList
         {
             CreateDummyGraph();
             int index = 0;
+            bigO = 0;
             while (list.Count > 0 && index < list.Count)
             {
-                if(!list[index].isVisited)
+                bigO++;
+                if (!list[index].isVisited)
                     RemoveKCores(degree, list[index]);
                 index++;
-            } 
+            }
         }
 
         public void CreateDummyGraph()
@@ -516,6 +515,7 @@ namespace LinkedList
 
         public void RemoveKCores(int degree, GraphNode root)
         {
+            bigO++;
             if (root.isVisited) return;
 
             if (root.nodes.Count < degree)
@@ -525,6 +525,7 @@ namespace LinkedList
                 GraphNode node;
                 while (index < root.nodes.Count)
                 {
+                    bigO++;
                     node = root.nodes[index];
                     node.nodes.Remove(root);
                     if (node.nodes.Count < degree)
@@ -533,6 +534,217 @@ namespace LinkedList
                 }
 
                 list.Remove(root);
+            }
+        }
+
+        private void btnCycle_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lblOperationMessage.Text = String.Empty;
+                bool isCycleDetected = DetectCycle();
+                txtResult.Text = isCycleDetected ? "Cycle Detected" : "Cycle Not Detected";
+                lblOperationMessage.Text = "Detect Cycle operation done.";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("btnCycle_Click error: " + ex.Message);
+            }
+        }
+
+        public bool DetectCycle()
+        {
+            if (list.Count == 0) return false;
+            HashSet<GraphNode> set = new HashSet<GraphNode>();
+            return DetectCycleDFS(list[0], set);
+        }
+
+        public bool DetectCycleDFS(GraphNode root, HashSet<GraphNode> set)
+        {
+            if (root == null) return false;
+            if (set.Contains(root))
+                return true;
+            set.Add(root);
+            foreach (GraphNode node in root.nodes)
+            {
+                if (DetectCycleDFS(node, set))
+                    return true;
+            }
+            set.Remove(root);
+            return false;
+        }
+
+        private void btnTopologicalSort_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lblOperationMessage.Text = String.Empty;
+                Stack<GraphNode> stack = new Stack<GraphNode>();
+
+                if (list.Count > 0)
+                {
+                    ClearGraphTraversal();
+                    foreach (GraphNode node in list)
+                        TopologicalSort(node, stack);
+                    string topologicalSort = stack.StackToString();
+                    txtResult.Text = topologicalSort;
+                }
+                else
+                    txtResult.Text = "Empty List";
+
+                lblOperationMessage.Text = "Topological Sort done.";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("btnTopologicalSort_Click error: " + ex.Message);
+            }
+            //Stack<int> e = new Stack<int>();
+
+        }
+
+        public void TopologicalSort(GraphNode root, Stack<GraphNode> stack)
+        {
+            if (root.isVisited) return;
+            foreach (GraphNode node in root.nodes)
+            {
+                if (node.isVisited) continue;
+                TopologicalSort(node, stack);
+            }
+
+            stack.Push(root);
+            root.isVisited = true;
+        }
+
+        private void btnNumberOfPaths_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Source is Root Node and Destination has to be entered in Number Of Nodes textbox.
+                int targetVal = Convert.ToInt32(txtNumberOfNodes.Text);
+                ClearGraphTraversal();
+                int path = FindNumberOfPaths(targetVal, list[0], 0);
+                txtResult.Text = Convert.ToString(path);
+                lblOperationMessage.Text = "Operation: Number of Paths Successfull";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("btnNumberOfPaths_Click: " + ex.Message);
+            }
+        }
+
+        public int FindNumberOfPaths(int target, GraphNode source, int path)
+        {
+            if (source.isVisited) return 0;
+            foreach (GraphNode node in source.nodes)
+            {
+                if (node.data == target)
+                    path += 1;
+                else
+                    path = FindNumberOfPaths(target, node, path);
+            }
+            return path;
+        }
+
+        private void btnWaterJug_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int[] input = SearchForm.ConvertToIntArray(txtNumberOfNodes.Text.Split(','));
+                //4 3 2
+                int[,] array = new int[input[0]+1, input[1]+1];
+                int target = input[2];
+                /*
+                    Number of moves
+                    1. Fill Jug A from Tank
+                    2. Fill Jug B from Tank
+                    3. Empty Jug A
+                    4. Empty Jug B
+                    5. Pour from Jug A to B
+                    6. Pour from Jug B to A
+                */
+                string result = String.Empty;
+                List <Pair<int,int>> steps = WaterJugBFS(array, target);
+                if (steps != null && steps.Count > 0)
+                {
+                    result = steps[0].ListToString(steps);
+                    txtResult.Text = result;
+                }
+                else
+                    txtResult.Text = "Solution doesn't exists.";
+                lblOperationMessage.Text = "Water Jug operation performed.";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("btnWaterJug_Click error: " + ex.Message);
+            }
+        }
+
+        public List<Pair<int, int>> WaterJugBFS(int[,] input, int target)
+        {
+            Queue<Pair<int, int>> queue = new Queue<Pair<int, int>>();
+            int jug_a = 0, jug_b = 0;
+            Pair<int, int> pair = new Pair<int, int>(jug_a, jug_b);
+            queue.Enqueue(pair);
+            List<Pair<int, int>> steps = new List<Pair<int, int>>();
+            bool solutionExists = false;
+
+            while (queue.Count > 0)
+            {
+                pair = queue.Dequeue();
+                if (input[pair.First, pair.Second] == 1) continue;
+
+                steps.Add(pair);
+                if ((pair.First == target && pair.Second == 0) || (pair.First == 0 && pair.Second == target))
+                {
+                    solutionExists = true;
+                    break;
+                }
+
+                jug_a = pair.First;
+                jug_b = pair.Second;
+                input[jug_a, jug_b] = 1;
+                WaterJug_AddConnectedNodes(input.GetLength(0)-1, input.GetLength(1)-1, queue, pair);
+            }
+
+            return solutionExists ? steps : null;
+        }
+
+        public void WaterJug_AddConnectedNodes(int capacity_a, int capacity_b, Queue<Pair<int, int>> queue, Pair<int, int> pair)
+        {
+            /*
+                Number of moves
+                1. Fill Jug A from Tank
+                2. Fill Jug B from Tank
+                3. Empty Jug A
+                4. Empty Jug B
+                5. Pour from Jug A to B
+                6. Pour from Jug B to A
+            */
+
+            if (capacity_a > pair.First)
+                queue.Enqueue(new Pair<int, int>(capacity_a, pair.Second));
+
+            if (capacity_b > pair.Second)
+                queue.Enqueue(new Pair<int, int>(pair.First, capacity_b));
+
+            if (pair.First > 0)
+                queue.Enqueue(new Pair<int, int>(0, pair.Second));
+
+            if (pair.Second > 0)
+                queue.Enqueue(new Pair<int, int>(pair.First, 0));
+
+            if (capacity_b > pair.Second && pair.First > 0)
+            {
+                int afterPour_a = pair.First > capacity_b ? pair.First - capacity_b + pair.Second : 0;
+                int afterPout_b = pair.First > capacity_b ? capacity_b : pair.First + pair.Second;
+                queue.Enqueue(new Pair<int, int>(afterPour_a, afterPout_b));
+            }
+
+            if (capacity_a > pair.First && pair.Second > 0)
+            {
+                int afterPour_b = pair.Second > capacity_a ? Math.Min(pair.Second - capacity_a + pair.First, capacity_b) : 0;
+                int afterPour_a = pair.Second > capacity_a ? capacity_a : Math.Min(pair.Second + pair.First, capacity_a);
+                queue.Enqueue(new Pair<int, int>(afterPour_a, afterPour_b));
             }
         }
     }

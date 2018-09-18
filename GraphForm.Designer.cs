@@ -50,6 +50,10 @@
             this.btnKnightProblem = new System.Windows.Forms.Button();
             this.btnMotherVertexOptimized = new System.Windows.Forms.Button();
             this.btnKCores = new System.Windows.Forms.Button();
+            this.btnCycle = new System.Windows.Forms.Button();
+            this.btnTopologicalSort = new System.Windows.Forms.Button();
+            this.btnNumberOfPaths = new System.Windows.Forms.Button();
+            this.btnWaterJug = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblNumberOfNodes
@@ -257,11 +261,55 @@
             this.btnKCores.UseVisualStyleBackColor = true;
             this.btnKCores.Click += new System.EventHandler(this.btnKCores_Click);
             // 
+            // btnCycle
+            // 
+            this.btnCycle.Location = new System.Drawing.Point(220, 230);
+            this.btnCycle.Name = "btnCycle";
+            this.btnCycle.Size = new System.Drawing.Size(81, 23);
+            this.btnCycle.TabIndex = 22;
+            this.btnCycle.Text = "Detect Cycle";
+            this.btnCycle.UseVisualStyleBackColor = true;
+            this.btnCycle.Click += new System.EventHandler(this.btnCycle_Click);
+            // 
+            // btnTopologicalSort
+            // 
+            this.btnTopologicalSort.Location = new System.Drawing.Point(305, 229);
+            this.btnTopologicalSort.Name = "btnTopologicalSort";
+            this.btnTopologicalSort.Size = new System.Drawing.Size(75, 23);
+            this.btnTopologicalSort.TabIndex = 23;
+            this.btnTopologicalSort.Text = "Topological";
+            this.btnTopologicalSort.UseVisualStyleBackColor = true;
+            this.btnTopologicalSort.Click += new System.EventHandler(this.btnTopologicalSort_Click);
+            // 
+            // btnNumberOfPaths
+            // 
+            this.btnNumberOfPaths.Location = new System.Drawing.Point(3, 256);
+            this.btnNumberOfPaths.Name = "btnNumberOfPaths";
+            this.btnNumberOfPaths.Size = new System.Drawing.Size(75, 23);
+            this.btnNumberOfPaths.TabIndex = 24;
+            this.btnNumberOfPaths.Text = "# Paths";
+            this.btnNumberOfPaths.UseVisualStyleBackColor = true;
+            this.btnNumberOfPaths.Click += new System.EventHandler(this.btnNumberOfPaths_Click);
+            // 
+            // btnWaterJug
+            // 
+            this.btnWaterJug.Location = new System.Drawing.Point(84, 256);
+            this.btnWaterJug.Name = "btnWaterJug";
+            this.btnWaterJug.Size = new System.Drawing.Size(75, 23);
+            this.btnWaterJug.TabIndex = 25;
+            this.btnWaterJug.Text = "Water Jug";
+            this.btnWaterJug.UseVisualStyleBackColor = true;
+            this.btnWaterJug.Click += new System.EventHandler(this.btnWaterJug_Click);
+            // 
             // GraphForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(390, 259);
+            this.ClientSize = new System.Drawing.Size(390, 284);
+            this.Controls.Add(this.btnWaterJug);
+            this.Controls.Add(this.btnNumberOfPaths);
+            this.Controls.Add(this.btnTopologicalSort);
+            this.Controls.Add(this.btnCycle);
             this.Controls.Add(this.btnKCores);
             this.Controls.Add(this.btnMotherVertexOptimized);
             this.Controls.Add(this.btnKnightProblem);
@@ -318,5 +366,9 @@
         private System.Windows.Forms.Button btnKnightProblem;
         private System.Windows.Forms.Button btnMotherVertexOptimized;
         private System.Windows.Forms.Button btnKCores;
+        private System.Windows.Forms.Button btnCycle;
+        private System.Windows.Forms.Button btnTopologicalSort;
+        private System.Windows.Forms.Button btnNumberOfPaths;
+        private System.Windows.Forms.Button btnWaterJug;
     }
 }

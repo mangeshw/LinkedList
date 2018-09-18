@@ -53,8 +53,6 @@
       <DependentUpon>ArrayForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ArrayRotate.cs" />
-    <Compile Include="Class1.cs" />
-    <Compile Include="Class2.cs" />
     <Compile Include="CustomListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +97,12 @@
     <Compile Include="TreeForm.Designer.cs">
       <DependentUpon>TreeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="WeightedGraphForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WeightedGraphForm.Designer.cs">
+      <DependentUpon>WeightedGraphForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ArrayForm.resx">
       <DependentUpon>ArrayForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -131,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TreeForm.resx">
       <DependentUpon>TreeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WeightedGraphForm.resx">
+      <DependentUpon>WeightedGraphForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

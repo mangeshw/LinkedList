@@ -114,5 +114,19 @@ namespace LinkedList
                 graphForm = null;
             }
         }
+
+        private void btnWeightedGraph_Click(object sender, EventArgs e)
+        {
+            WeightedGraphForm wGraphForm;
+            try
+            {
+                wGraphForm = new WeightedGraphForm();
+                wGraphForm.ShowDialog();
+            }
+            finally
+            {
+                wGraphForm = null;
+            }
+        }
     }
 }

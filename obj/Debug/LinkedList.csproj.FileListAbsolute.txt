@@ -29,3 +29,4 @@ C:\Users\Visitor\Documents\Visual Studio 2015\Projects\LinkedList\LinkedList\obj
 C:\Users\Visitor\Documents\Visual Studio 2015\Projects\LinkedList\LinkedList\obj\Debug\LinkedList.TreeForm.resources
 C:\Users\Visitor\Documents\Visual Studio 2015\Projects\LinkedList\LinkedList\obj\Debug\LinkedList.csproj.GenerateResource.Cache
 C:\Users\Visitor\Documents\Visual Studio 2015\Projects\LinkedList\LinkedList\obj\Debug\LinkedList.GraphForm.resources
+C:\Users\Visitor\Documents\Visual Studio 2015\Projects\LinkedList\LinkedList\obj\Debug\LinkedList.WeightedGraphForm.resources

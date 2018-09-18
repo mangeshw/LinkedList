@@ -1,5 +1,6 @@
 # LinkedList
 Algorithms for data different structures
-Implemented algorithms with different data structures, just to show basic understanding of coding.
+Implemented algorithms with different data structures, to show basic understanding of coding.
 
-I have also implemented a custom class, LNode - which is to implement Deque.
+13 Custom classes have been implemented for basic data structures like List, Stack, Queue, Tree, Graph, Weighted-Graphs
+Pairs and Utility class with extension methods, classes can be found in Program.cs

@@ -663,14 +663,17 @@ namespace LinkedList
                     6. Pour from Jug B to A
                 */
                 string result = String.Empty;
-                List <Pair<int,int>> steps = WaterJugBFS(array, target);
+                //List<Pair<int, int>> steps = WaterJugBFS(array, target);
+                Stack<Pair<int, int>> steps = WaterJug_WithTree(array, target);
                 if (steps != null && steps.Count > 0)
                 {
-                    result = steps[0].ListToString(steps);
+                    //result = Utility.ListToString(steps);
+                    result = Utility.StackPairToString(steps);
                     txtResult.Text = result;
                 }
                 else
                     txtResult.Text = "Solution doesn't exists.";
+                
                 lblOperationMessage.Text = "Water Jug operation performed.";
             }
             catch (Exception ex)
@@ -687,6 +690,7 @@ namespace LinkedList
             queue.Enqueue(pair);
             List<Pair<int, int>> steps = new List<Pair<int, int>>();
             bool solutionExists = false;
+            List<GraphNode> list = new List<GraphNode>();
 
             while (queue.Count > 0)
             {
@@ -705,7 +709,6 @@ namespace LinkedList
                 input[jug_a, jug_b] = 1;
                 WaterJug_AddConnectedNodes(input.GetLength(0)-1, input.GetLength(1)-1, queue, pair);
             }
-
             return solutionExists ? steps : null;
         }
 
@@ -745,6 +748,127 @@ namespace LinkedList
                 int afterPour_b = pair.Second > capacity_a ? Math.Min(pair.Second - capacity_a + pair.First, capacity_b) : 0;
                 int afterPour_a = pair.Second > capacity_a ? capacity_a : Math.Min(pair.Second + pair.First, capacity_a);
                 queue.Enqueue(new Pair<int, int>(afterPour_a, afterPour_b));
+            }
+        }
+
+        public Stack<Pair<int, int>> WaterJug_WithTree(int[,] input, int target)
+        { 
+            Stack<Pair<int, int>> steps = new Stack<Pair<int, int>>();
+            Queue<GraphNode> queue = new Queue<GraphNode>();
+            int jug_a = 0, jug_b = 0;
+            Pair<int, int> pair = new Pair<int, int>(jug_a, jug_b);
+            
+            GraphNode node = new GraphNode();
+            node.pairData = pair;
+            node.parentNode = null;
+            queue.Enqueue(node);
+
+            int capacity_a = input.GetLength(0);
+            int capacity_b = input.GetLength(1);
+            
+            while (queue.Count > 0)
+            {
+                node = queue.Dequeue();
+                if (input[node.pairData.First, node.pairData.Second] == 1) continue;
+                if (node.pairData.First == target || node.pairData.Second == target)
+                {
+                    while (node != null)
+                    {
+                        steps.Push(node.pairData);
+                        node = node.parentNode;
+                    }
+                    return steps;
+                }
+                else
+                {
+                    //Add All possible combinations to Queue
+                    jug_a = node.pairData.First;
+                    jug_b = node.pairData.Second;
+                    input[jug_a, jug_b] = 1;
+                    WaterJug_AddConnectedNodes_WithTree(capacity_a-1, capacity_b-1, queue, node);
+                }
+            }
+
+            return steps;
+        }
+        
+        public void WaterJug_AddConnectedNodes_WithTree(int capacity_a, int capacity_b, Queue<GraphNode> queue, GraphNode node)
+        {
+            /*
+                Number of moves
+                1. Fill Jug A from Tank
+                2. Fill Jug B from Tank
+                3. Empty Jug A
+                4. Empty Jug B
+                5. Pour from Jug A to B
+                6. Pour from Jug B to A
+            */
+
+            GraphNode newNode = null;
+            Pair<int, int> tuple = null;
+            
+            if (capacity_a > node.pairData.First)
+            {
+                tuple = new Pair<int, int>(capacity_a, node.pairData.Second);
+                newNode = new GraphNode();
+                newNode.pairData = tuple;
+                node.nodes.Add(newNode);
+                newNode.parentNode = node;
+                queue.Enqueue(newNode);
+            }
+
+            if (capacity_b > node.pairData.Second)
+            {
+                tuple = new Pair<int, int>(node.pairData.First, capacity_b);
+                newNode = new GraphNode();
+                newNode.pairData = tuple;
+                node.nodes.Add(newNode);
+                newNode.parentNode = node;
+                queue.Enqueue(newNode);
+            }
+
+            if (node.pairData.First > 0)
+            {
+                tuple = new Pair<int, int>(0, node.pairData.Second);
+                newNode = new GraphNode();
+                newNode.pairData = tuple;
+                node.nodes.Add(newNode);
+                newNode.parentNode = node;
+                queue.Enqueue(newNode);
+            }
+
+            if (node.pairData.Second > 0)
+            {
+                tuple = new Pair<int, int>(node.pairData.First, 0);
+                newNode = new GraphNode();
+                newNode.pairData = tuple;
+                node.nodes.Add(newNode);
+                newNode.parentNode = node;
+                queue.Enqueue(newNode);
+            }
+
+            if (capacity_b > node.pairData.Second && node.pairData.First > 0)
+            {
+                int afterPour_a = node.pairData.First > capacity_b ? node.pairData.First - capacity_b + node.pairData.Second : 0;
+                int afterPout_b = node.pairData.First > capacity_b ? capacity_b : node.pairData.First + node.pairData.Second;
+                tuple = new Pair<int, int>(afterPour_a, afterPout_b);
+                newNode = new GraphNode();
+                newNode.pairData = tuple;
+                node.nodes.Add(newNode);
+                newNode.parentNode = node;
+                queue.Enqueue(newNode);
+            }
+
+            if (capacity_a > node.pairData.First && node.pairData.Second > 0)
+            {
+                int afterPour_b = node.pairData.Second > capacity_a ? Math.Min(node.pairData.Second - capacity_a + node.pairData.First, capacity_b) : 0;
+                int afterPour_a = node.pairData.Second > capacity_a ? capacity_a : Math.Min(node.pairData.Second + node.pairData.First, capacity_a);
+                tuple = new Pair<int, int>(afterPour_a, afterPour_b);
+                newNode = new GraphNode();
+                newNode.pairData = tuple;
+                node.nodes.Add(newNode);
+                newNode.parentNode = node;
+                queue.Enqueue(newNode);
             }
         }
     }
